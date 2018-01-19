@@ -37,7 +37,7 @@ void clear_array(std::ostream& ostr){
 	movq %r15, %r14		#obtain the first pointer
 	movl $30000, %ecx	#num of loop
 clear_element:
-	movq $0, (%r14)
+	movb $0, (%r14)
 	incq %r14
 	loop clear_element
 )";
@@ -78,7 +78,7 @@ void getchar(std::ostream& ostr){
 std::stack<int> loop_stack;
 void open_loop(std::ostream& ostr){
 	static int loop_serial_num = 0;
-	ostr << R"(	cmpq $0, (%r15)
+	ostr << R"(	cmpb $0, (%r15)
 	je loop_close_)" << loop_serial_num << R"(
 loop_open_)" << loop_serial_num << R"(:
 )";
@@ -88,7 +88,7 @@ loop_open_)" << loop_serial_num << R"(:
 void close_loop(std::ostream& ostr){
 	int const loop_serial_num = loop_stack.top();
 	loop_stack.pop();
-	ostr << R"(	cmpq $0, (%r15)
+	ostr << R"(	cmpb $0, (%r15)
 	jne loop_open_)" << loop_serial_num << R"(
 loop_close_)" << loop_serial_num << R"(:
 )";

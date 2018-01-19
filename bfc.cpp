@@ -52,11 +52,11 @@ void decptr(std::ostream& ostr){
 )";
 }
 void incval(std::ostream& ostr){
-	ostr << R"(	incq (%r15)
+	ostr << R"(	incb (%r15)
 )";
 }
 void decval(std::ostream& ostr){
-	ostr << R"(	decq (%r15)
+	ostr << R"(	decb (%r15)
 )";
 }
 void putchar(std::ostream& ostr){
